@@ -5,8 +5,8 @@ RUN apk update \
     && adduser -u 1001 -h /home/sunbird/ -D sunbird \
     && mkdir -p /home/sunbird
 RUN chown -R sunbird:sunbird /home/sunbird
-USER root
-COPY ./assessment-api/assessment-service/conf/application.conf  /home/sunbird/assessment-service-1.0-SNAPSHOT/config/application.conf
+# USER root
+# COPY ./assessment-api/assessment-service/conf/application.conf  /home/sunbird/assessment-service-1.0-SNAPSHOT/config/application.conf
 
 USER sunbird
 COPY ./assessment-api/assessment-service/target/assessment-service-1.0-SNAPSHOT-dist.zip /home/sunbird/
