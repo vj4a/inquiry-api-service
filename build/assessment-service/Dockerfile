@@ -7,13 +7,13 @@ RUN apk update \
 RUN chown -R sunbird:sunbird /home/sunbird
 # USER root
 # COPY ./assessment-api/assessment-service/conf/application.conf  /home/sunbird/assessment-service-1.0-SNAPSHOT/config/application.conf
-
+RUN chmod 777 /home/sunbird/assessment-service-1.0-SNAPSHOT/config/application.conf
 USER sunbird
 COPY ./assessment-api/assessment-service/target/assessment-service-1.0-SNAPSHOT-dist.zip /home/sunbird/
 RUN unzip /home/sunbird/assessment-service-1.0-SNAPSHOT-dist.zip -d /home/sunbird/
 RUN rm /home/sunbird/assessment-service-1.0-SNAPSHOT-dist.zip
 COPY --chown=sunbird ./schemas /home/sunbird/assessment-service-1.0-SNAPSHOT/schemas
-# WORKDIR /home/sunbird/
+WORKDIR /home/sunbird/assessment-service-1.0-SNAPSHOT/config
 
 # CMD java -XX:+PrintFlagsFinal $JAVA_OPTIONS -cp '/home/sunbird/assessment-service-1.0-SNAPSHOT/lib/*' -Dconfig.file=/home/sunbird/assessment-service-1.0-SNAPSHOT/config/application.conf  -Dlogger.file=/home/sunbird/assessment-service-1.0-SNAPSHOT/config/logback.xml play.core.server.ProdServerStart /home/sunbird/assessment-service-1.0-SNAPSHOT
 CMD sleep 2400
