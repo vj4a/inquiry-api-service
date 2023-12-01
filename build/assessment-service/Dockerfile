@@ -4,11 +4,11 @@ RUN apk update \
     && apk add curl \
     && adduser -u 1001 -h /home/sunbird/ -D sunbird \
     && mkdir -p /home/sunbird
-# RUN chown -R sunbird:sunbird /home/sunbird
+RUN chown -R sunbird:sunbird /home/sunbird
 USER root
 COPY ./assessment-api/assessment-service/conf/application.conf  /home/sunbird/assessment-service-1.0-SNAPSHOT/config/application.conf
+
 USER sunbird
-RUN chown -R sunbird:sunbird /home/sunbird
 COPY ./assessment-api/assessment-service/target/assessment-service-1.0-SNAPSHOT-dist.zip /home/sunbird/
 RUN unzip /home/sunbird/assessment-service-1.0-SNAPSHOT-dist.zip -d /home/sunbird/
 RUN rm /home/sunbird/assessment-service-1.0-SNAPSHOT-dist.zip
